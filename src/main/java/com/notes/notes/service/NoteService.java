@@ -21,20 +21,22 @@ public class NoteService {
     public Note CreateNote(Note note) {
         return noteRepository.save(note);
     }
-   /* public Nota actualizar(Long id, Nota nuevaNota) {
-        return notaRepository.findById(id).map(nota -> {
-            nota.setTitulo(nuevaNota.getTitulo());
-            nota.setContenido(nuevaNota.getContenido());
-            return notaRepository.save(nota);
-        }).orElse(null);
+
+    public Note update(Long id, Note note) {
+        return noteRepository.findById(id)
+                .map(existingNote -> {
+                    existingNote.setTitle(note.getTitle());
+                    existingNote.setDescription(note.getDescription());
+                    return noteRepository.save(existingNote);
+                })
+                .orElseThrow(() -> new RuntimeException("Note not found with id " + id));
     }
 
-    public void eliminar(Long id) {
-        notaRepository.deleteById(id);
+    public void delete(Long id) {
+        noteRepository.deleteById(id);
     }
 
-    */
-}
+    }
 
 
 
