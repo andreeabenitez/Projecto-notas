@@ -29,22 +29,15 @@ public class NoteRestController {
         return ResponseEntity.ok(newNote);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<Note> update(@PathVariable Long id, @RequestBody Note note) {
-        try {
-            Note updated = noteService.update(id, note);
-            return ResponseEntity.ok(updated);
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<Note> updateNote(@PathVariable Long id, @RequestBody Note noteDetails) {
+        Note updatedNote = noteService.updateNote(id, noteDetails);
+        return ResponseEntity.ok(updatedNote);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        if (noteService.obtainAll().stream().anyMatch(n -> n.getId().equals(id))) {
-            noteService.delete(id);
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<Void> deleteNote(@PathVariable Long id) {
+        noteService.deleteNote(id);
+        return ResponseEntity.noContent().build();
     }
 }
+
