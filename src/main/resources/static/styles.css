@@ -1,0 +1,104 @@
+/* Contenedor principal */
+.container {
+    width: 80%;
+    margin: 50px auto;
+    font-family: Arial, sans-serif;
+}
+
+/* Títulos */
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+/* Tarjeta de formulario */
+.card {
+    background-color: #f7f7f7;
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Formulario */
+.note-form .form-group {
+    margin-bottom: 15px;
+}
+
+.note-form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.note-form input,
+.note-form textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.note-form button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.note-form button:hover {
+    background-color: #0056b3;
+}
+
+/* Tabla de notas */
+.notes-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.notes-table th,
+.notes-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.notes-table th {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Botones */
+.btn-warning {
+    padding: 5px 10px;
+    background-color: #ffc107;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+}
+
+.btn-danger {
+    padding: 5px 10px;
+    background-color: #dc3545;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+.btn-danger:hover {
+    background-color: #b02a37;
+}
+
