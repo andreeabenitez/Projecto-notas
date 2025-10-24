@@ -1,4 +1,4 @@
-/* package com.notes.notes;
+package com.notes.notes;
 
 import com.notes.notes.model.Note;
 import com.notes.notes.repository.NoteRepository;
@@ -24,16 +24,16 @@ public class TestNoteService {
     private NoteService noteService;
 
     @Test
-    void obteinAllNotes() {
+    void obtainAllNotes() {
         //Arrange (Preparar)
         Note note1 = new Note();
-        note1.setDescription("Descripcion 1");
+        note1.setDescription("Description 1");
         Note note2 = new Note();
-        note2.setDescription("Descripcion 2");
+        note2.setDescription("Description 2");
 
-        List<Note> testNote = Arrays.asList(note1, note2);
+        List<Note> testNotes = Arrays.asList(note1, note2);
 
-        when (noteRepository.findAll()).thenReturn((testNote));
+        when (noteRepository.findAll()).thenReturn(testNotes);
 
         // Act (Actuar)
         List<Note> result = noteService.obtainAll();
@@ -48,8 +48,4 @@ public class TestNoteService {
 
     }
 
-
-
 }
-
-*/
