@@ -58,6 +58,7 @@ public class ErrorResponse {
         }
     }
 
+
     public class NoteNotFoundException extends RuntimeException {
 
         // Constructor
