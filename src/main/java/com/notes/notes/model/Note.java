@@ -14,7 +14,18 @@ public class Note {
 
     private String title;
     private String description;
+    private boolean completed;
 
+    public Note(Long id, String title, String description, boolean completed) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.completed = completed;
+    }
+
+
+    public Note() {
+    }
 
     public Long getId() {
         return id;
@@ -40,7 +51,16 @@ public class Note {
         this.description = description;
     }
 
+    public boolean isCompleted() {
+        return completed;
+    }
 
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
+    }
 }
+
+
+
 
 
