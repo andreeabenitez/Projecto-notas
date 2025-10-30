@@ -50,5 +50,24 @@
         </tbody>
     </table>
 </div>
+<script th:src="@{/scripts.js}"></script>
+<script>
+    document.querySelectorAll('.delete-btn').forEach(btn => {
+        btn.addEventListener('click', event => {
+            const id = btn.getAttribute('data-id');
+            const confirmDelete = confirm(`¿Seguro que deseas eliminar la nota #${id}?`);
+            if (!confirmDelete) {
+                event.preventDefault();
+            }
+        });
+    });
+
+    const form = document.getElementById('noteForm');
+    form.addEventListener('submit', () => {
+        setTimeout(() => {
+            form.reset();
+        }, 300);
+    });
+</script>
 </body>
 </html>

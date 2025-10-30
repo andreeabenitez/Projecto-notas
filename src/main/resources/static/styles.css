@@ -1,104 +1,63 @@
-/* Contenedor principal */
-.container {
-    width: 80%;
-    margin: 50px auto;
-    font-family: Arial, sans-serif;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
 }
 
-/* Títulos */
-h1 {
-    text-align: center;
-    margin-bottom: 30px;
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #6b73ff, #000dff);
     color: #333;
 }
 
-/* Tarjeta de formulario */
-.card {
-    background-color: #f7f7f7;
-    padding: 20px;
-    margin-bottom: 30px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #fff;
 }
 
-.card-body {
+form {
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
     display: flex;
     flex-direction: column;
+    width: 300px;
 }
 
-/* Formulario */
-.note-form .form-group {
-    margin-bottom: 15px;
-}
-
-.note-form label {
-    font-weight: bold;
-    margin-bottom: 5px;
-    display: block;
-}
-
-.note-form input,
-.note-form textarea {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 14px;
-}
-
-.note-form button {
-    padding: 10px 15px;
-    background-color: #007bff;
-    border: none;
-    color: white;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.note-form button:hover {
-    background-color: #0056b3;
-}
-
-/* Tabla de notas */
-.notes-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.notes-table th,
-.notes-table td {
-    border: 1px solid #ddd;
+button {
     padding: 10px;
-    text-align: left;
+    border: none;
+    border-radius: 6px;
+    background-color: #000dff;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-.notes-table th {
-    background-color: #007bff;
-    color: white;
+button:hover {
+    background-color: #6b73ff;
 }
 
-/* Botones */
-.btn-warning {
-    padding: 5px 10px;
-    background-color: #ffc107;
-    color: white;
+
+
+p {
+    text-align: center;
+    margin-top: 15px;
+    color: #fff;
+}
+
+a {
+    color: #ffeb3b;
     text-decoration: none;
-    border-radius: 4px;
 }
 
-.btn-warning:hover {
-    background-color: #e0a800;
+a:hover {
+    text-decoration: underline;
 }
-
-.btn-danger {
-    padding: 5px 10px;
-    background-color: #dc3545;
-    color: white;
-    text-decoration: none;
-    border-radius: 4px;
-}
-
-.btn-danger:hover {
-    background-color: #b02a37;
-}
-
