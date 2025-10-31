@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class AuthService {
     private final AppUserRepository repo;
@@ -29,5 +31,17 @@ public class AuthService {
         u.setPassword(encoder.encode(rawPassword));
         u.setRole("ROLE_USER");
         repo.save(u);
+    }
+    public boolean login(String username, String rawPassword) {
+        Optional<AppUser> optionalUser = repo.findByUsername(username);
+
+        if (optionalUser.isEmpty()) {
+            return false; // usuario no encontrado
+        }
+
+        AppUser user = optionalUser.get();
+
+        // ✅ compara contraseñas encriptadas
+        return encoder.matches(rawPassword, user.getPassword());
     }
 }

@@ -1,21 +1,15 @@
 package com.notes.notes.controller;
+
 import com.notes.notes.exception.DuplicateUsernameException;
-import com.notes.notes.model.AppUser;
-import com.notes.notes.model.Note;
 import com.notes.notes.service.AuthService;
 import jakarta.validation.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.List;
 
 @Controller
 @Validated
@@ -24,7 +18,9 @@ public class AuthController {
     private final AuthService authService;
 
     @Autowired
-    public AuthController(AuthService authService) { this.authService = authService; }
+    public AuthController(AuthService authService) {
+        this.authService = authService;
+    }
 
     @GetMapping("/login")
     public String login() {
@@ -34,6 +30,21 @@ public class AuthController {
     @GetMapping("/register")
     public String registerForm() {
         return "register";
+    }
+
+    @PostMapping("/login")
+    public String login(@RequestParam @NotBlank String username,
+                        @RequestParam @NotBlank String password,
+                        Model model) {
+
+        boolean success = authService.login(username, password);
+
+        if (success) {
+            return "redirect:/index"; // ✅ Muestra index.html
+        } else {
+            model.addAttribute("error", "Usuario o contraseña incorrectos");
+            return "login"; // 🔁 Vuelve al login con mensaje de error
+        }
     }
 
     @PostMapping("/register")

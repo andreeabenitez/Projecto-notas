@@ -18,7 +18,7 @@ public class NoteService {
     public List<Note> obtainAll(){
         return noteRepository.findAll();
     }
-    public Note CreateNote(Note note) {
+    public Note createNote(Note note) {
         return noteRepository.save(note);
     }
 

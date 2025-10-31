@@ -1,10 +1,10 @@
 package com.notes.notes.exception;
-
+/*
 public class hh {
 }
 
 
-@ExceptionHandler(NoteNotFoundException.class)
+ @ExceptionHandler(NoteNotFoundException.class)
 // El méttodo devuelve un ModelAndView, que nos permite especificar tanto
 // la vista (la página HTML) como los datos a mostrar.
 public ModelAndView handleNoteNotFound(NoteNotFoundException ex) {
@@ -21,3 +21,5 @@ public ModelAndView handleNoteNotFound(NoteNotFoundException ex) {
 
     return modelAndView;
 }
+
+ */
