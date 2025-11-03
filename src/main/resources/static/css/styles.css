@@ -1,85 +1,194 @@
+/* --- RESET Y BASE --- */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Arial', sans-serif;
-    color: #fff;
-
+    font-family: 'Segoe UI', Arial, sans-serif;
 }
 
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    background: #f5f7fb; /* Fondo claro y limpio */
+    color: #333;
     min-height: 100vh;
-    background: linear-gradient(135deg, #6b73ff, #000dff);
+    padding-top: 90px; /* espacio para el header fijo */
+}
+
+/* --- HEADER --- */
+header {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+
+    background-color: #ffffff;
+    border-bottom: 2px solid #007bff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+
+    padding: 15px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header h1 {
+    font-size: 1.5rem;
+    color: #007bff;
+    font-weight: 700;
+    margin: 0;
+}
+
+header div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #444;
+    font-weight: 500;
+}
+
+/* --- BOTÓN LOGOUT --- */
+header button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 7px 14px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+header button:hover {
+    background-color: #0056d2;
+}
+
+/* --- CONTENEDOR PRINCIPAL --- */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+
+.container h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 25px;
+    font-size: 1.8rem;
+}
+
+/* --- CARD FORMULARIO --- */
+.card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    padding: 25px;
+    margin-bottom: 30px;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.note-form label {
+    font-weight: 600;
+    margin-bottom: 5px;
     color: #333;
 }
 
-h1 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #fff;
-}
-
-form {
-    background-color: rgba(255, 255, 255, 0.95);
-    padding: 30px 40px;
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-    display: flex;
-    flex-direction: column;
-    width: 300px;
-}
-
-input[type="text"],
-input[type="password"] {
+.note-form input[type="text"],
+.note-form textarea {
+    width: 100%;
     padding: 10px;
-    margin-bottom: 15px;
-    border-radius: 6px;
     border: 1px solid #ccc;
-    outline: none;
-    transition: border 0.3s;
-}
-
-input[type="text"]:focus,
-input[type="password"]:focus {
-    border-color: #000dff;
-}
-
-button {
-    padding: 10px;
-    border: none;
     border-radius: 6px;
-    background-color: #000dff;
-    color: #fff;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.note-form input[type="text"]:focus,
+.note-form textarea:focus {
+    border-color: #007bff;
+}
+
+/* --- BOTÓN GUARDAR --- */
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 6px;
     font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: all 0.3s ease;
 }
 
-button:hover {
-    background-color: #6b73ff;
+.btn-primary:hover {
+    background-color: #0056d2;
 }
 
-div[th\\:if] {
-    margin-bottom: 15px;
-    color: #ff4d4d;
-    font-weight: bold;
-    text-align: center;
+/* --- TABLA DE NOTAS --- */
+.notes-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
-p {
-    text-align: center;
-    margin-top: 15px;
+.notes-table th {
+    background-color: #007bff;
     color: #fff;
+    text-align: left;
+    padding: 12px;
+    font-weight: 600;
 }
 
-a {
-    color: #ffeb3b;
+.notes-table td {
+    padding: 12px;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.notes-table tr:hover {
+    background-color: #f2f6ff;
+}
+
+/* --- BOTÓN ELIMINAR --- */
+.btn-danger {
+    background-color: #dc3545;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: bold;
     text-decoration: none;
+    transition: all 0.3s ease;
 }
 
-a:hover {
-    text-decoration: underline;
+.btn-danger:hover {
+    background-color: #b52a36;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+        padding: 10px 20px;
+    }
+
+    body {
+        padding-top: 110px;
+    }
+
+    .container {
+        padding: 20px;
+    }
+
+    .notes-table th, .notes-table td {
+        font-size: 0.9rem;
+    }
 }

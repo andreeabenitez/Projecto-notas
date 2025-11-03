@@ -42,16 +42,12 @@ public class NoteControllerTest {
 
         // Usamos CreateNote en lugar de saveNote
         Note savedNote = new Note(1L, "Note title", "Note test", false);
-        Mockito.when(noteService.CreateNote(Mockito.any(Note.class))).thenReturn(savedNote);
+        Mockito.when(noteService.createNote(Mockito.any(Note.class))).thenReturn(savedNote);
 
         // Ejecutamos la petición POST y validamos la respuesta
-        mockMvc.perform(post("/api/notes")
+        mockMvc.perform(post("/notes/create")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(newNoteJson))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value(1))
-                .andExpect(jsonPath("$.title").value("Note title"))
-                .andExpect(jsonPath("$.description").value("Note test"))
-                .andExpect(jsonPath("$.completed").value(false));
+                .andExpect(status().is3xxRedirection());
     }
 }
