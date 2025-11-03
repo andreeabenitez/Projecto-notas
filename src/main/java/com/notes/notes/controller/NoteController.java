@@ -20,7 +20,7 @@ public class NoteController {
             this.noteService = noteService;
         }
 
-    @GetMapping("/index")
+    @GetMapping("")
     public String index(Model model) {
         model.addAttribute("notes", noteService.obtainAll());
         model.addAttribute("note", new Note()); // para el formulario
@@ -31,20 +31,20 @@ public class NoteController {
     @PostMapping("/create")
     public String createNote(@ModelAttribute("note") Note note) {
         noteService.createNote(note);
-        return "redirect:/notes/index";
+        return "redirect:/notes";
     }
 
     // --- POST (simulando PUT): Actualizar una nota ---
-    @PutMapping("/update/{id}")
+    @PostMapping("/update/{id}")
     public String updateNote(@PathVariable Long id, @ModelAttribute("note") Note noteDetails) {
         noteService.updateNote(id, noteDetails);
-        return "redirect:/notes/index";
+        return "redirect:/notes";
     }
 
     // --- GET (simulando DELETE): Eliminar una nota ---
-    @GetMapping("/delete/{id}")
+    @PostMapping("/delete/{id}")
     public String deleteNote(@PathVariable Long id) {
         noteService.deleteNote(id);
-        return "redirect:/notes/index";
+        return "redirect:/notes";
     }
 }

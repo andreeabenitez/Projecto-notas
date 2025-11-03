@@ -32,20 +32,6 @@ public class AuthController {
         return "register";
     }
 
-    @PostMapping("/login")
-    public String login(@RequestParam @NotBlank String username,
-                        @RequestParam @NotBlank String password,
-                        Model model) {
-
-        boolean success = authService.login(username, password);
-
-        if (success) {
-            return "redirect:/index"; // ✅ Muestra index.html
-        } else {
-            model.addAttribute("error", "Usuario o contraseña incorrectos");
-            return "login"; // 🔁 Vuelve al login con mensaje de error
-        }
-    }
 
     @PostMapping("/register")
     public String register(@RequestParam @NotBlank String username, @RequestParam @NotBlank String password, Model model) {
