@@ -23,7 +23,6 @@
 <main class="container">
     <h1>Notas</h1>
 
-    <!-- Formulario para crear o actualizar nota -->
     <div class="card">
         <div class="card-body">
             <form id="noteForm" th:action="@{/notes/create}" th:object="${note}" method="post" class="note-form">
@@ -45,7 +44,6 @@
         </div>
     </div>
 
-    <!-- Tabla de notas -->
     <table class="notes-table">
         <thead>
         <tr>

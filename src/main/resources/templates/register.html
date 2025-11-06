@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head><meta charset="UTF-8"><title>Registro</title></head>
+<head><meta charset="UTF-8"><title>Registro</title>
+    <link rel="stylesheet" th:href="@{/css/login.css}" />
+</head>
 <body>
 <h1>Crear cuenta</h1>
 <div th:if="${error}" th:text="${error}"></div>
