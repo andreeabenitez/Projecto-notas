@@ -59,32 +59,14 @@
             <td th:text="${n.title}">Título</td>
             <td th:text="${n.description}">Descripción</td>
             <td>
-                <a th:href="@{/notes/delete/{id}(id=${n.id})}" class="btn-danger delete-btn"
-                   th:attr="data-id=${n.id}">Eliminar</a>
+                <form th:action="@{/notes/delete/{id}(id=${n.id})}" method="post" style="display:inline;">
+                    <button type="submit" class="btn-danger delete-btn">Eliminar</button>
+                </form>
             </td>
         </tr>
         </tbody>
     </table>
 </main>
-
-<script th:src="@{/js/scripts.js}"></script>
-<script>
-    document.querySelectorAll('.delete-btn').forEach(btn => {
-        btn.addEventListener('click', event => {
-            const id = btn.getAttribute('data-id');
-            const confirmDelete = confirm(`¿Seguro que deseas eliminar la nota #${id}?`);
-            if (!confirmDelete) {
-                event.preventDefault();
-            }
-        });
-    });
-
-    const form = document.getElementById('noteForm');
-    form.addEventListener('submit', () => {
-        setTimeout(() => form.reset(), 300);
-    });
-</script>
-
 </body>
 </html>
 
