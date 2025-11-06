@@ -8,46 +8,42 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.context.annotation.Bean;
-import org.springframework.http.MediaType;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(NoteController.class)
-@AutoConfigureMockMvc(addFilters = false)
-public class NoteControllerTest {
+@AutoConfigureMockMvc
+class NoteControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
-    @Autowired
-    private NoteService noteService; // Será nuestro mock inyectado
+    @MockBean
+    private NoteService noteService;
 
-    // Bean mock del servicio para Spring
-    @TestConfiguration
-    static class TestConfig {
-        @Bean
-        public NoteService noteService() {
-            return Mockito.mock(NoteService.class);
-        }
-    }
-
+    @WithMockUser(username = "testUser")
     @Test
     void newApiNote_shouldReturnSavedNote() throws Exception {
-        String newNoteJson = "{\"title\": \"Note title\",\"description\": \"Noteeeeeee2 test\", \"completed\":false}";
 
-        // Usamos CreateNote en lugar de saveNote
-        Note savedNote = new Note(1L, "Note title", "Note test", false);
-        Mockito.when(noteService.createNote(Mockito.any(Note.class))).thenReturn(savedNote);
+        Note savedNote = new Note();
+        savedNote.setId(1L);
 
-        // Ejecutamos la petición POST y validamos la respuesta
+        Mockito.when(noteService.createFor(any(Note.class), eq("testUser")))
+                .thenReturn(savedNote);
+
         mockMvc.perform(post("/notes/create")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(newNoteJson))
+                        .param("title", "Note title")
+                        .param("description", "Note test")
+                        .with(csrf()))
                 .andExpect(status().is3xxRedirection());
     }
 }
+
+
+

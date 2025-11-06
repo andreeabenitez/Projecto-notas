@@ -33,10 +33,10 @@ public class TestNoteService {
 
         List<Note> testNotes = Arrays.asList(note1, note2);
 
-        when (noteRepository.findAll()).thenReturn(testNotes);
+        when(noteRepository.findByOwnerUsername("testUser")).thenReturn(testNotes);
 
         // Act (Actuar)
-        List<Note> result = noteService.obtainAll();
+        List<Note> result = noteService.findAllFor("testUser");
 
         // Assert (Verificar / comparar rdo esperado rdo obtenido)
 

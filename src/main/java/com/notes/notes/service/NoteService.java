@@ -1,43 +1,49 @@
 package com.notes.notes.service;
 
+import com.notes.notes.model.AppUser;
 import com.notes.notes.model.Note;
+import com.notes.notes.repository.AppUserRepository;
 import com.notes.notes.repository.NoteRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class NoteService {
-    private NoteRepository noteRepository;
 
-    @Autowired
-    public NoteService(NoteRepository noteRepository) {
+    private final NoteRepository noteRepository;
+    private final AppUserRepository userRepository;
+
+    public NoteService(NoteRepository noteRepository, AppUserRepository userRepository) {
         this.noteRepository = noteRepository;
+        this.userRepository = userRepository;
     }
-    public List<Note> obtainAll(){
-        return noteRepository.findAll();
+
+    public List<Note> findAllFor(String username) {
+        return noteRepository.findByOwnerUsername(username);
     }
-    public Note createNote(Note note) {
+
+    public Optional<Note> findByIdFor(Integer id, String username) {
+        return noteRepository.findByIdAndOwnerUsername(id, username);
+    }
+
+    public Note createFor(Note note, String username) {
+        AppUser owner = userRepository.findByUsername(username).orElseThrow();
+        note.setOwner(owner);
         return noteRepository.save(note);
     }
 
-    public Note updateNote(Long id, Note noteDetails) {
-        Note existingNote = noteRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Nota no encontrada con ID: " + id));
-        existingNote.setTitle(noteDetails.getTitle());
-        existingNote.setDescription(noteDetails.getDescription());
-
-        return noteRepository.save(existingNote);
+    public Note updateFor(Integer id, Note updated, String username) {
+        Note n = noteRepository.findByIdAndOwnerUsername(id, username).orElseThrow();
+        n.setTitle(updated.getTitle());
+        n.setDescription(updated.getDescription());
+        return noteRepository.save(n);
     }
 
-    public void deleteNote(Long id) {
-        if (!noteRepository.existsById(id)) {
-            throw new RuntimeException("Nota no encontrada con ID: " + id);
-        }
-        noteRepository.deleteById(id);
+    public void deleteByIdFor(Integer id, String username) {
+        Note n = noteRepository.findByIdAndOwnerUsername(id, username).orElseThrow();
+        noteRepository.delete(n);
     }
 }
-
-
 

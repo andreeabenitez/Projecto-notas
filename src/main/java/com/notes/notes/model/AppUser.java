@@ -18,6 +18,9 @@ public class AppUser {
     @Column(nullable = false, length = 30)
     private String role;
 
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
+    private java.util.List<Note> notes = new java.util.ArrayList<>();
+
     public AppUser(){}
 
     public AppUser(Long id, String username, String password, String role) {

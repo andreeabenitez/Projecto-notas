@@ -3,48 +3,62 @@ package com.notes.notes.controller;
 import com.notes.notes.model.Note;
 import com.notes.notes.service.NoteService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @Controller
 @RequestMapping("/notes")
 public class NoteController {
-    private NoteService noteService;
+
+    private final NoteService noteService;
 
     @Autowired
     public NoteController(NoteService noteService) {
-            this.noteService = noteService;
-        }
+        this.noteService = noteService;
+    }
+
+    @ModelAttribute("note")
+    public Note newNote() {
+        return new Note();
+    }
 
     @GetMapping("")
-    public String index(Model model) {
-        model.addAttribute("notes", noteService.obtainAll());
-        model.addAttribute("note", new Note()); // para el formulario
+    public String listNotes(Model model, @AuthenticationPrincipal User authUser) {
+        model.addAttribute("notes", noteService.findAllFor(authUser.getUsername()));
         return "index";
     }
 
-    // --- POST: Crear una nueva nota ---
+    @GetMapping("/list")
+    public String listNotesAlias(Model model, @AuthenticationPrincipal User authUser) {
+        model.addAttribute("notes", noteService.findAllFor(authUser.getUsername()));
+        return "index";
+    }
+
+    @GetMapping("/{id}")
+    public String viewNote(@PathVariable Integer id, Model model, @AuthenticationPrincipal User authUser) {
+        var note = noteService.findByIdFor(id, authUser.getUsername()).orElse(null);
+        model.addAttribute("note", note);
+        return "redirect:/notes";
+    }
+
     @PostMapping("/create")
-    public String createNote(@ModelAttribute("note") Note note) {
-        noteService.createNote(note);
+    public String createNote(@ModelAttribute("note") Note note, @AuthenticationPrincipal User authUser) {
+        noteService.createFor(note, authUser.getUsername());
         return "redirect:/notes";
     }
 
-    // --- POST (simulando PUT): Actualizar una nota ---
     @PostMapping("/update/{id}")
-    public String updateNote(@PathVariable Long id, @ModelAttribute("note") Note noteDetails) {
-        noteService.updateNote(id, noteDetails);
+    public String updateNote(@PathVariable Integer id, @ModelAttribute("note") Note updatedNote, @AuthenticationPrincipal User authUser) {
+        noteService.updateFor(id, updatedNote, authUser.getUsername());
         return "redirect:/notes";
     }
 
-    // --- GET (simulando DELETE): Eliminar una nota ---
     @PostMapping("/delete/{id}")
-    public String deleteNote(@PathVariable Long id) {
-        noteService.deleteNote(id);
+    public String deleteNote(@PathVariable Integer id, @AuthenticationPrincipal User authUser) {
+        noteService.deleteByIdFor(id, authUser.getUsername());
         return "redirect:/notes";
     }
 }

@@ -3,7 +3,6 @@ package com.notes.notes.service;
 import com.notes.notes.exception.DuplicateUsernameException;
 import com.notes.notes.model.AppUser;
 import com.notes.notes.repository.AppUserRepository;
-import jakarta.validation.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -36,12 +35,11 @@ public class AuthService {
         Optional<AppUser> optionalUser = repo.findByUsername(username);
 
         if (optionalUser.isEmpty()) {
-            return false; // usuario no encontrado
+            return false;
         }
 
         AppUser user = optionalUser.get();
 
-        // ✅ compara contraseñas encriptadas
         return encoder.matches(rawPassword, user.getPassword());
     }
 }
