@@ -62,8 +62,6 @@ src/main/resources/
 ## Configuración y ejecución
 
 Clona el repositorio:
-
-```bash
 git clone <URL_DEL_REPOSITORIO>
 cd nombre-del-proyecto
 
