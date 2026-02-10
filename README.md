@@ -26,15 +26,24 @@ El proyecto sigue el patrón **MVC (Modelo-Vista-Controlador)** para separar res
 
 ## Estructura del proyecto
 src/main/java/notas/
+
 ├── controller/ → Controladores (manejan las URLs y peticiones)
+
 ├── model/ → Entidades de la base de datos (@Entity)
+
 ├── repository/ → Repositorios JPA (acceso a datos)
+
 ├── service/ → Lógica de negocio
+
 └── NotasApplication.java → Clase principal que arranca la aplicación
 
+
 src/main/resources/
+
 ├── templates/ → Archivos HTML (index.html, formulario.html)
+
 └── application.properties → Configuración de Spring Boot y base de datos
+
 
 
 ---
@@ -62,52 +71,60 @@ src/main/resources/
 ## Configuración y ejecución
 
 Clona el repositorio:
+
 git clone <URL_DEL_REPOSITORIO>
 cd nombre-del-proyecto
 
 Compila el proyecto:
+
 mvn clean package
 
 
 Ejecuta la aplicación:
+
 mvn spring-boot:run
 
 
 Abre tu navegador y accede a:
+
 http://localhost:8080/notas
 
 ---
 
 ## Archivos principales
-Archivo / Carpeta	Descripción
-NotasApplication.java	Clase principal que inicia Spring Boot
-model/Nota.java	Representa la entidad Nota en la base de datos
-repository/NotaRepository.java	Interfaz para operaciones CRUD sobre Nota
-service/NotaService.java	Contiene la lógica de negocio para notas
-controller/NotaController.java	Controla las rutas y comunicación con las vistas
-templates/index.html	Lista todas las notas
-templates/formulario.html	Formulario para crear/editar notas
-application.properties	Configuración de H2 y Spring Boot
+
+- Archivo / Carpeta	Descripción
+- NotasApplication.java	Clase principal que inicia Spring Boot
+- model/Nota.java	Representa la entidad Nota en la base de datos
+- repository/NotaRepository.java	Interfaz para operaciones CRUD sobre Nota
+- service/NotaService.java	Contiene la lógica de negocio para notas
+- controller/NotaController.java	Controla las rutas y comunicación con las vistas
+- templates/index.html	Lista todas las notas
+- templates/formulario.html	Formulario para crear/editar notas
+- application.properties	Configuración de H2 y Spring Boot
 
 ---
 
 ## Patrones y buenas prácticas
-Patrón MVC (Separación de Modelo, Vista y Controlador)
-Uso de Servicios para lógica de negocio
-Repositorio JPA para abstraer acceso a la base de datos
-DTOs opcionales para futuras implementaciones de API REST
-Thymeleaf para vistas dinámicas seguras
-Autenticación y autorización (Spring Security)
+
+- Patrón MVC (Separación de Modelo, Vista y Controlador)
+- Uso de Servicios para lógica de negocio
+- Repositorio JPA para abstraer acceso a la base de datos
+- DTOs opcionales para futuras implementaciones de API REST
+- Thymeleaf para vistas dinámicas seguras
+- Autenticación y autorización (Spring Security)
 
 ---
 
 ## Mejoras futuras
-Implementar MySQL o PostgreSQL en lugar de H2
-Agregar paginación y búsqueda de notas
-Soporte para adjuntar imágenes o archivos a las notas
-Implementar API REST con DTOs para un frontend independiente
+
+- Implementar MySQL o PostgreSQL en lugar de H2
+- Agregar paginación y búsqueda de notas
+- Soporte para adjuntar imágenes o archivos a las notas
+- Implementar API REST con DTOs para un frontend independiente
 
 ---
 
 ## Autor
+
 Andrea Benitez Brenes
