@@ -76,6 +76,8 @@ mvn spring-boot:run
 Abre tu navegador y accede a:
 http://localhost:8080/notas
 
+---
+
 ## Archivos principales
 Archivo / Carpeta	Descripción
 NotasApplication.java	Clase principal que inicia Spring Boot
@@ -87,6 +89,7 @@ templates/index.html	Lista todas las notas
 templates/formulario.html	Formulario para crear/editar notas
 application.properties	Configuración de H2 y Spring Boot
 
+---
 
 ## Patrones y buenas prácticas
 Patrón MVC (Separación de Modelo, Vista y Controlador)
@@ -96,6 +99,7 @@ DTOs opcionales para futuras implementaciones de API REST
 Thymeleaf para vistas dinámicas seguras
 Autenticación y autorización (Spring Security)
 
+---
 
 ## Mejoras futuras
 Implementar MySQL o PostgreSQL en lugar de H2
@@ -103,6 +107,7 @@ Agregar paginación y búsqueda de notas
 Soporte para adjuntar imágenes o archivos a las notas
 Implementar API REST con DTOs para un frontend independiente
 
+---
 
 ## Autor
 Andrea Benitez Brenes
